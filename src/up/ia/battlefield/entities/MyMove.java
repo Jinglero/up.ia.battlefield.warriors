@@ -20,6 +20,9 @@ public class MyMove extends Move {
 		try {
 			destino = BattleField.getInstance().getFieldCell(x, y);
 			destino.getFieldCellType();
+			if(BattleField.getInstance().getEnemyData().getInRange()){
+				System.out.print("Esta en rango!");
+			}
 		} catch (OutOfMapException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

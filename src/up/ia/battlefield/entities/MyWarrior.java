@@ -10,7 +10,6 @@ import ia.exceptions.RuleException;
 
 
 public class MyWarrior extends Warrior{
-	private boolean direccionHorizontal = true;
 
 	public MyWarrior(String name, int health, int defense, int strength,
 			int speed, int range) throws RuleException {
@@ -35,6 +34,8 @@ public class MyWarrior extends Warrior{
 				x--;
 			
 			try {
+				System.out.println("Width: "+ConfigurationManager.getInstance().getMapWidth()+" - x:" +x);
+				
 				if (x < ConfigurationManager.getInstance().getMapWidth() && x > 0 
 						&& BattleField.getInstance().getFieldCell(x, y)
 								.getFieldCellType() != FieldCellType.BLOCKED )
@@ -43,7 +44,7 @@ public class MyWarrior extends Warrior{
 				else {
 					direccionHorizontal = !direccionHorizontal;
 					m.setDestino(--x, y);
-					System.out.println(x + "  " + y);
+					System.out.println("X:" + x + " - Y" + y);
 				}
 
 			} catch (OutOfMapException e) {
@@ -65,7 +66,8 @@ public class MyWarrior extends Warrior{
 		s+="St:("+super.getStrength()+") ";
 		s+="R:("+super.getRange()+") ";
 		s+=" - Speed: "+super.getSpeed()+"\n";
-		s+="- X:"+super.getPosition().toString()+"\n";
+		//pincha
+		//s+="- X:"+super.getPosition().toString()+"\n";
 		
 		return s;
 				
