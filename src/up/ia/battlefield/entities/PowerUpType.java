@@ -5,5 +5,6 @@ public enum PowerUpType {
 	DEFENSE,
 	RANGE,
 	STRENGTH,
-	SPEED
+	SPEED,
+	NOTHING
 }

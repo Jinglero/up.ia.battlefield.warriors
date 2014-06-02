@@ -2,11 +2,17 @@ package up.ia.battlefield.entities;
 
 
 
+import java.util.Collections;
+import java.util.List;
+
 import ia.battle.camp.Action;
 import ia.battle.camp.Attack;
 import ia.battle.camp.BattleField;
+import ia.battle.camp.FieldCell;
+import ia.battle.camp.FieldCellType;
 import ia.battle.camp.Skip;
 import ia.battle.camp.Warrior;
+import ia.exceptions.OutOfMapException;
 
 public class MyStrategy {
 	BattleField bf;
@@ -20,10 +26,12 @@ public class MyStrategy {
 	}
 	
 	public Action getAction(long tick, int numberAction){
+		List<FieldCell> nextPosition =null;
 		/*
 		 * Si el Enemigo esta cerca, Me acerco para atacarlo.
 		 */
 		if(bf.getEnemyData().getInRange()){
+			System.out.println("Enemigo en rango! Atacar!!");
 			//Atacar sin importar el numero de acción.
 			a = new Attack(bf.getEnemyData().getFieldCell());
 			return a;
@@ -31,6 +39,7 @@ public class MyStrategy {
 		/*
 		 * Si mi enemigo no esta cerca analizo los items especiales a mi al rededor.
 		 */
+		System.out.println("Items?");
 		if(!PowerUp){
 			switch(this.getPowerUpType()){
 			case DEFENSE:
@@ -48,26 +57,43 @@ public class MyStrategy {
 			case STRENGTH:
 				PowerUp = true;
 			break;
-			default:
+			case NOTHING:
 				if(bf.getSpecialItems().size()>0){
 					//moveto:
-					bf.getSpecialItems().get(0);
+					//nextPosition = bf.getSpecialItems();
 				}
 			break;
 			}
 			
-		}else{
-			/*
-			 * Tengo que esquivar todos los items especiales de ahora en más,
-			 * porque ya tengo el que quiero.
-			 */
-			MyMove m = new MyMove();
-			
-			return m;
 		}
+		/*
+		 * Tengo que esquivar todos los items especiales de ahora en más,
+		 * porque ya tengo el que quiero.
+		 */
 		
+		MyMove m = new MyMove();
+		if(nextPosition==null){
+			nextPosition = bf.getAdjacentCells(w.getPosition());
+		}
+		Collections.shuffle(nextPosition);
+		for(int i=0; i<nextPosition.size();i++){
+			try {
+				if(bf.getFieldCell(nextPosition.get(i).getX(), nextPosition.get(i).getY()).getFieldCellType() == FieldCellType.NORMAL){
+					System.out.println("Estoy:"+ w.getPosition()+" - Llego: "+nextPosition.get(i));
+					m.setDestino(nextPosition.get(i).getX(), nextPosition.get(i).getY());
+					return m;
+				}else{
+					System.err.println("Shit!");
+				}
+			} catch (OutOfMapException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			i++;
+		}
 		a = new Skip();
 		return a;
+
 	}
 	
 	private PowerUpType getPowerUpType(){
@@ -86,7 +112,7 @@ public class MyStrategy {
 		if(w.getInitialStrength()<w.getStrength()){
 			return PowerUpType.STRENGTH;
 		}
-		return null;
+		return PowerUpType.NOTHING;
 	
 	
 	}

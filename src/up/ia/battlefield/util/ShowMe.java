@@ -4,7 +4,7 @@ import ia.battle.camp.BattleField;
 
 public class ShowMe {
 
-	public void ShowMe(){
+	public ShowMe(){
 	
 	}
 	
