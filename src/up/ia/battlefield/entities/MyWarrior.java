@@ -10,7 +10,6 @@ public class MyWarrior extends Warrior{
 	public MyWarrior(String name, int health, int defense, int strength, int speed, int range) throws RuleException {
 		
 		super(name, health, defense, strength, speed, range);
-		System.out.print(this.toString());
 		strategy = new MyStrategy(this);
 	}
 

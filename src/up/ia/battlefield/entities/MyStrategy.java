@@ -31,7 +31,7 @@ public class MyStrategy {
 		 * Si el Enemigo esta cerca, Me acerco para atacarlo.
 		 */
 		if(bf.getEnemyData().getInRange()){
-			System.out.println("Enemigo en rango! Atacar!!");
+			System.out.println("Hasta la vista baby!");
 			//Atacar sin importar el numero de acción.
 			a = new Attack(bf.getEnemyData().getFieldCell());
 			return a;
@@ -39,7 +39,6 @@ public class MyStrategy {
 		/*
 		 * Si mi enemigo no esta cerca analizo los items especiales a mi al rededor.
 		 */
-		System.out.println("Items?");
 		if(!PowerUp){
 			switch(this.getPowerUpType()){
 			case DEFENSE:
@@ -79,14 +78,10 @@ public class MyStrategy {
 		for(int i=0; i<nextPosition.size();i++){
 			try {
 				if(bf.getFieldCell(nextPosition.get(i).getX(), nextPosition.get(i).getY()).getFieldCellType() == FieldCellType.NORMAL){
-					System.out.println("Estoy:"+ w.getPosition()+" - Llego: "+nextPosition.get(i));
 					m.setDestino(nextPosition.get(i).getX(), nextPosition.get(i).getY());
 					return m;
-				}else{
-					System.err.println("Shit!");
 				}
 			} catch (OutOfMapException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			i++;

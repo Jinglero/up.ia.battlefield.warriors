@@ -13,5 +13,10 @@ public class MyManager extends WarriorManager {
 			
 
 	}
+	@Override
+	public String getName() {
+		
+		return "Pedro";
+	}
 
 }
