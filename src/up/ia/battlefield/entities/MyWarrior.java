@@ -1,27 +1,27 @@
 package up.ia.battlefield.entities;
 
 import ia.battle.camp.Action;
-import ia.battle.camp.BattleField;
-import ia.battle.camp.ConfigurationManager;
-import ia.battle.camp.FieldCellType;
 import ia.battle.camp.Warrior;
-import ia.exceptions.OutOfMapException;
 import ia.exceptions.RuleException;
 
 
 public class MyWarrior extends Warrior{
-
-	public MyWarrior(String name, int health, int defense, int strength,
-			int speed, int range) throws RuleException {
+	MyStrategy strategy;
+	public MyWarrior(String name, int health, int defense, int strength, int speed, int range) throws RuleException {
 		
 		super(name, health, defense, strength, speed, range);
 		System.out.print(this.toString());
-
+		strategy = new MyStrategy(this);
 	}
 
 	@Override
 	public Action playTurn(long tick, int actionNumber) {
-
+		
+		
+		return strategy.getAction(tick, actionNumber);
+		
+		/*
+		boolean direccionHorizontal = false;
 		if (actionNumber == 1) {
 
 			MyMove m = new MyMove();
@@ -56,6 +56,7 @@ public class MyWarrior extends Warrior{
 		}
 
 		return null;
+		*/
 	}
 	
 	public String toString(){
