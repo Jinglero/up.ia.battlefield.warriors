@@ -32,7 +32,7 @@ public class MyMove extends Move {
 	@Override
 	public ArrayList<FieldCell> move() {
 
-		ArrayList<FieldCell> path = new ArrayList<>();
+		ArrayList<FieldCell> path = new ArrayList<FieldCell>();
 		
 		path.add(destino);
 		

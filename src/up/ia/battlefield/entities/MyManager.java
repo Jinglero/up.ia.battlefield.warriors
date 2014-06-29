@@ -8,7 +8,7 @@ public class MyManager extends WarriorManager {
 	Warrior warrior=null;
 	@Override
 	public Warrior getNextWarrior() throws RuleException {
-			return new MyWarrior("Warrior 1", 60, 10, 10, 10, 10);
+			return new MyWarrior("Pedro", 60, 10, 10, 10, 10);
 	}
 
 }
