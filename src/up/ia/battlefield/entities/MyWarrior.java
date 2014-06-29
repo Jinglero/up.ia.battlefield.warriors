@@ -6,17 +6,20 @@ import java.util.List;
 
 import up.ia.battlefield.utils.Logger;
 import ia.battle.camp.Action;
+<<<<<<< HEAD
 import ia.battle.camp.BattleField;
 import ia.battle.camp.ConfigurationManager;
 import ia.battle.camp.FieldCell;
 import ia.battle.camp.FieldCellType;
 import ia.battle.camp.Skip;
+=======
+>>>>>>> FETCH_HEAD
 import ia.battle.camp.Warrior;
-import ia.exceptions.OutOfMapException;
 import ia.exceptions.RuleException;
 
 
 public class MyWarrior extends Warrior{
+<<<<<<< HEAD
 	private FieldCell actual;
 	private Logger log;
 	private List<FieldCell> listAdj;
@@ -32,14 +35,30 @@ public class MyWarrior extends Warrior{
 		log = new Logger();
 		System.out.print(this.toString());
 		
+=======
+	MyStrategy strategy;
+	public MyWarrior(String name, int health, int defense, int strength, int speed, int range) throws RuleException {
+		
+		super(name, health, defense, strength, speed, range);
+		strategy = new MyStrategy(this);
+>>>>>>> FETCH_HEAD
 	}
 
 	@Override
 	public Action playTurn(long tick, int actionNumber) {
+<<<<<<< HEAD
 		boolean direccionHorizontal = true;
 		Action r;
 		log.printWarrior(BattleField.getInstance().getEnemyData());
 		actual = getPosition();
+=======
+		
+		
+		return strategy.getAction(tick, actionNumber);
+		
+		/*
+		boolean direccionHorizontal = false;
+>>>>>>> FETCH_HEAD
 		if (actionNumber == 1) {
 			listAdj = new ArrayList<FieldCell>();
 			listAdj = BattleField.getInstance().getAdjacentCells(actual);
@@ -78,8 +97,14 @@ public class MyWarrior extends Warrior{
 			log.addToLog("3) Acci—n");
 			r= new Skip();
 		}
+<<<<<<< HEAD
 		
 		return r;
+=======
+
+		return null;
+		*/
+>>>>>>> FETCH_HEAD
 	}
 	
 	public String toString(){
